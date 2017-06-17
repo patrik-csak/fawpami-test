@@ -56,3 +56,15 @@ function register_post_type() {
 }
 
 add_action( 'init', __NAMESPACE__ . '\\register_post_type' );
+
+function add_menu_page() {
+	\add_menu_page(
+		'Custom Menu Page',
+		'Custom Menu Page',
+		'manage_options',
+		'custom_menu_page',
+		'',
+		'fa-smile-o' );
+}
+
+add_action( 'admin_menu', __NAMESPACE__ . '\\add_menu_page' );
