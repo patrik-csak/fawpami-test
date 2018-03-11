@@ -37,7 +37,7 @@ function register_post_type()
         'labels' => [
             'name' => name('singular'),
             'singular_name' => name('singular'),
-            'add_new_item' => 'Add New Custom ' . name('singular'),
+            'add_new_item' => 'Add New ' . name('singular'),
             'edit_item' => 'Edit ' . name('singular'),
             'new_item' => 'New ' . name('singular'),
             'view_item' => 'View ' . name('singular'),
