@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Plugin Name: FAWPAMI Test
  * Plugin URI: https://github.com/ptrkcsk/font-awesome-wordpress-admin-menu-icons
@@ -10,46 +9,30 @@
  * License: UNLICENSED
  */
 
-namespace FAWPAMI;
-
-const PREFIX = 'fawpami';
+namespace Fawpami;
 
 function register_post_type()
 {
-    /**
-     * @param string $variant 'singular' or 'plural'
-     *
-     * @return string
-     */
-    function name($variant)
-    {
-        switch ($variant) {
-            case 'singular':
-                return 'Custom Post Type';
-                break;
-            case 'plural':
-                return 'Custom Post Types';
-                break;
-        }
-    }
+    $singular = 'Custom Post Type';
+    $plural = 'Custom Post Types';
 
-    \register_post_type(PREFIX . '_cpt', [
+    \register_post_type('fawpami_cpt', [
         'labels' => [
-            'name' => name('singular'),
-            'singular_name' => name('singular'),
-            'add_new_item' => 'Add New ' . name('singular'),
-            'edit_item' => 'Edit ' . name('singular'),
-            'new_item' => 'New ' . name('singular'),
-            'view_item' => 'View ' . name('singular'),
-            'view_items' => 'View ' . name('plural'),
-            'search_items' => 'Search ' . name('plural'),
-            'not_found' => 'No ' . name('plural') . ' found',
-            'not_found_in_trash' => 'No ' . name('plural') . ' found in Trash',
-            'all_items' => 'All ' . name('plural'),
-            'archives' => name('singular') . ' Archives',
-            'attributes' => name('singular') . ' Attributes',
-            'insert_into_item' => 'Insert into ' . name('singular'),
-            'uploaded_to_this_item' => 'Uploaded to this ' . name('singular'),
+            'name' => $singular,
+            'singular_name' => $singular,
+            'add_new_item' => "Add New {$singular}",
+            'edit_item' => "Edit {$singular}",
+            'new_item' => "New {$singular}",
+            'view_item' => "View {$singular}",
+            'view_items' => "View {$plural}",
+            'search_items' => "Search {$plural}",
+            'not_found' => "No {$plural} found",
+            'not_found_in_trash' => "No {$plural} found in Trash",
+            'all_items' => "All {$plural}",
+            'archives' => "{$singular} Archives",
+            'attributes' => "{$singular} Attributes",
+            'insert_into_item' => "Insert into {$singular}",
+            'uploaded_to_this_item' => "Uploaded to this {$singular}",
         ],
         'public' => true,
         'menu_icon' => 'fab fa-font-awesome-alt',
