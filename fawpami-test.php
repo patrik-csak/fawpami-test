@@ -5,41 +5,45 @@
  * Description: A plugin for testing 'FA WP Admin Menu Icons' plugin
  * Version: 1.0.0
  * Author: Patrik Csak
- * Author URI: patrikcsak.com
+ * Author URI: github.com/ptrkcsk
  * License: UNLICENSED
  */
 
 namespace Fawpami;
 
-function register_post_type()
+function register_post_type($post_type, $label, $icon)
 {
-    $singular = 'Custom Post Type';
-    $plural = 'Custom Post Types';
-
-    \register_post_type('fawpami_cpt', [
+    \register_post_type($post_type, [
         'labels' => [
-            'name' => $singular,
-            'singular_name' => $singular,
-            'add_new_item' => "Add New {$singular}",
-            'edit_item' => "Edit {$singular}",
-            'new_item' => "New {$singular}",
-            'view_item' => "View {$singular}",
-            'view_items' => "View {$plural}",
-            'search_items' => "Search {$plural}",
-            'not_found' => "No {$plural} found",
-            'not_found_in_trash' => "No {$plural} found in Trash",
-            'all_items' => "All {$plural}",
-            'archives' => "{$singular} Archives",
-            'attributes' => "{$singular} Attributes",
-            'insert_into_item' => "Insert into {$singular}",
-            'uploaded_to_this_item' => "Uploaded to this {$singular}",
+            'name' => $label,
+            'singular_name' => $label,
+            'add_new_item' => "Add New {$label}",
+            'edit_item' => "Edit {$label}",
+            'new_item' => "New {$label}",
+            'view_item' => "View {$label}",
+            'view_items' => "View {$label}s",
+            'search_items' => "Search {$label}s",
+            'not_found' => "No {$label}s found",
+            'not_found_in_trash' => "No {$label}s found in Trash",
+            'all_items' => "All {$label}s",
+            'archives' => "{$label} Archives",
+            'attributes' => "{$label} Attributes",
+            'insert_into_item' => /** @lang text */ "Insert into {$label}",
+            'uploaded_to_this_item' => "Uploaded to this {$label}",
         ],
         'public' => true,
-        'menu_icon' => 'fab fa-font-awesome-alt',
+        'menu_icon' => $icon,
     ]);
 }
 
-add_action('init', __NAMESPACE__ . '\\register_post_type');
+add_action('init', function () {
+    register_post_type(
+        'fawpami_cpt',
+        'Custom Post Type',
+        'fab fa-font-awesome'
+    );
+    register_post_type('fawpami_bad_icon', 'Bad Icon', 'fas fa-foo');
+});
 
 function add_menu_page()
 {
@@ -49,7 +53,7 @@ function add_menu_page()
         'manage_options',
         'custom_menu_page',
         '',
-        'fab fa-font-awesome'
+        'fab fa-font-awesome-alt'
     );
 }
 
