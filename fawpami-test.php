@@ -1,9 +1,8 @@
 <?php
 /*
  * Plugin Name: FAWPAMI Test
- * Plugin URI: https://github.com/ptrkcsk/font-awesome-wordpress-admin-menu-icons
  * Description: A plugin for testing 'FA WP Admin Menu Icons' plugin
- * Version: 1.0.0
+ * Version: 2.0.0
  * Author: Patrik Csak
  * Author URI: github.com/ptrkcsk
  * License: UNLICENSED
@@ -28,7 +27,7 @@ function register_post_type($post_type, $label, $icon)
             'all_items' => "All {$label}s",
             'archives' => "{$label} Archives",
             'attributes' => "{$label} Attributes",
-            'insert_into_item' => /** @lang text */ "Insert into {$label}",
+            'insert_into_item' => "Insert into {$label}",
             'uploaded_to_this_item' => "Uploaded to this {$label}",
         ],
         'public' => true,
@@ -36,16 +35,18 @@ function register_post_type($post_type, $label, $icon)
     ]);
 }
 
-add_action('init', function () {
+function registerPostTypes () {
     register_post_type(
         'fawpami_cpt',
         'Custom Post Type',
-        'fab fa-font-awesome'
+        'fa-brands fa-font-awesome'
     );
-    register_post_type('fawpami_bad_icon', 'Bad Icon', 'fas fa-foo');
-});
+    register_post_type('fawpami_bad_icon', 'Bad Icon', 'fa-solid fa-foo');
+}
 
-function add_menu_page()
+add_action('init', __NAMESPACE__ . '\\registerPostTypes');
+
+function addMenuPages()
 {
     \add_menu_page(
         'Custom Menu Page',
@@ -53,8 +54,16 @@ function add_menu_page()
         'manage_options',
         'custom_menu_page',
         '',
-        'fab fa-font-awesome-alt'
+        'fa-brands fa-fort-awesome'
+    );
+    \add_menu_page(
+        'Bad Icon',
+        'Bad Icon',
+        'manage_options',
+        'custom_menu_page',
+        '',
+        'fa-solid fa-foo'
     );
 }
 
-add_action('admin_menu', __NAMESPACE__ . '\\add_menu_page');
+add_action('admin_menu', __NAMESPACE__ . '\\addMenuPages');
